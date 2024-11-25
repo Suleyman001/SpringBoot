@@ -67,4 +67,4 @@ An advanced web application for managing electronic class records, designed to s
 ### Steps to Run
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/eClassSystem.git
+git clone https://github.com/Suleyman001/eClassSystem.git
