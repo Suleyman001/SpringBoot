@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>List of Pizzas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">List of Pizzas</h2>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Vegetarian</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="pizza : ${pizzas}">
+                    <tr>
+                        <td th:text="${pizza.pname}"></td>
+                        <td th:text="${pizza.categoryname}"></td>
+                        <td th:text="${pizza.vegetarian ? 'Yes' : 'No'}"></td>
+                        <td th:text="${pizza.price}"></td>
+                        <td>
+                            <a href="/update-pizza/{pizza.pname}" class="btn btn-warning">Edit</a>
+                            <a href="/delete-pizza/{pizza.pname}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>PIZZA | HOME PAGE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding-top: 56px; /* Add padding to prevent content from hiding under the navbar */
+        }
+        .cover {
+            height: 100vh; /* Ensure it takes 100% of the viewport height */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px; /* Space between cards */
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+        .navbar {
+            background-color: #343a40; /* Set navbar background to dark */
+            color: white; /* Ensure text is white */
+        }
+        footer {
+            background-color: #343a40; /* Dark background */
+            color: white; /* Light text */
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        /* Set a fixed height for the card images */
+        .card-img-top {
+            height: 200px; /* Fixed height */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+        <!-- Logo à esquerda -->
+        <a class="navbar-brand" href="#">PIZZA</a>
+
+
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/home" class="nav-link text-white">List</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/message" class="nav-link text-white">Messages</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/insert" class="nav-link text-white">Insert</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="dropdown nav-link text-white ms-auto">
+            <p class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${username}">username
+            </p>
+            <ul class="dropdown-menu ">
+                <li><a class="dropdown-item" href="login">Logout</a></li>
+
+            </ul>
+        </div>
+
+
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h2>Add Order</h2>
+            <form action="/orders/add" method="post">
+                <div class="form-group">
+                    <label for="pizzaName">Pizza Name</label>
+                    <input type="text" class="form-control" id="pizzaName" name="pizzaName" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" class="form-control" id="amount" name="amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="taken">Taken</label>
+                    <input type="datetime-local" class="form-control" id="taken" name="taken" required>
+                </div>
+                <div class="form-group">
+                    <label for="dispatched">Dispatched (Optional)</label>
+                    <input type="datetime-local" class="form-control" id="dispatched" name="dispatched">
+                </div>
+                <button type="submit" class="btn btn-success mt-3">Add Order</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

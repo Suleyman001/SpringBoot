@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>STUDENT MANAGEMENT | HOME PAGE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding-top: 56px; /* Add padding to prevent content from hiding under the navbar */
+        }
+        .cover {
+            height: 100vh; /* Ensure it takes 100% of the viewport height */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px; /* Space between cards */
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+        .navbar {
+            background-color: #343a40; /* Set navbar background to dark */
+            color: white; /* Ensure text is white */
+        }
+        footer {
+            background-color: #343a40; /* Dark background */
+            color: white; /* Light text */
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        /* Set a fixed height for the card images */
+        .card-img-top {
+            height: 200px; /* Fixed height */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+        <!-- Logo à esquerda -->
+        <a class="navbar-brand" href="#">STUDENT MANAGEMENT</a>
+
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/" class="nav-link text-white">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact" class="nav-link text-white">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/about" class="nav-link text-white">About</a>
+                </li>
+            </ul>
+        </div>
+
+        <a href="login" class="nav-link text-white ms-auto">Login</a>
+    </div>
+</nav>
+
+<!-- Cover -->
+<div class="cover" style="background-image: url('image/cover.jpg');">
+    <div>
+        <h1 class="display-4">Welcome to Our Student Management System!</h1>
+        <p class="lead">Manage subjects and marks effectively.</p>
+    </div>
+</div>
+
+<!-- Subjects Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">Available Subjects</h2>
+    <p class="text-center">Note: The following subjects are available for management.</p>
+    <div class="row">
+        <div class="col-md-3" th:each="subject : ${subjects}">
+            <div class="card">
+                <img src="image/subject/1.jpg" class="card-img-top" th:alt="${subject.subjectName}" th:src="@{/image/subject/1.jpg}"/> <!-- Update image path if necessary -->
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${subject.subjectName}">Subject Name</h5>
+                    <p class="card-text" th:text="'Marks: ' + ${subject.marks}"></p>
+                    <button class="btn btn-primary">Manage</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <img src="https://example.com/credy-logo.png" alt="Credy Logo" style="height: 30px;">
+    <div>Created by ALberto and Suleyman</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

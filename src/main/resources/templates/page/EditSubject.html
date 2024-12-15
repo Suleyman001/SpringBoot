@@ -1,0 +1,9 @@
+<h2>Edit Subject</h2>
+<form action="/subjects/edit" method="post">
+  <input type="hidden" name="subjectName" th:value="${subject.subjectName}">
+  <div class="form-group">
+    <label for="marks">Marks</label>
+    <input type="number" class="form-control" id="marks" name="marks" step="0.01" th:value="${subject.marks}" required>
+  </div>
+  <button type="submit" class="btn btn-warning mt-3">Update Subject</button>
+</form>

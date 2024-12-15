@@ -1,0 +1,21 @@
+<h2>Subjects</h2>
+<a href="/subjects/add" class="btn btn-primary">Add New Subject</a>
+<table class="table mt-3">
+    <thead>
+    <tr>
+        <th>Subject Name</th>
+        <th>Marks</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="subject : ${subjects}">
+        <td th:text="${subject.subjectName}"></td>
+        <td th:text="${subject.marks}"></td>
+        <td>
+            <a th:href="@{'/subjects/edit/' + ${subject.subjectName}}" class="btn btn-warning btn-sm">Edit</a>
+            <a th:href="@{'/subjects/delete/' + ${subject.subjectName}}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>

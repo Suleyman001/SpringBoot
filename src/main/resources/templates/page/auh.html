@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>PIZZA | HOME PAGE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding-top: 56px; /* Add padding to prevent content from hiding under the navbar */
+        }
+        .cover {
+            height: 100vh; /* Ensure it takes 100% of the viewport height */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px; /* Space between cards */
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+        .navbar {
+            background-color: #343a40; /* Set navbar background to dark */
+            color: white; /* Ensure text is white */
+        }
+        footer {
+            background-color: #343a40; /* Dark background */
+            color: white; /* Light text */
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        /* Set a fixed height for the card images */
+        .card-img-top {
+            height: 200px; /* Fixed height */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+        <!-- Logo à esquerda -->
+        <a class="navbar-brand" href="#">PIZZA</a>
+
+
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/home" class="nav-link text-white">List</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/message" class="nav-link text-white">Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/insert" class="nav-link text-white">Insert</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="dropdown nav-link text-white ms-auto">
+            <p class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${username}">username
+            </p>
+            <ul class="dropdown-menu ">
+                <li><a class="dropdown-item" href="login">Logout</a></li>
+
+            </ul>
+        </div>
+
+
+    </div>
+</nav>
+<div class="container mt-5">
+    <h1 class="text-center">Pizza Management Dashboard</h1>
+
+    <!-- Tab Navigation -->
+    <ul class="nav nav-tabs" id="tabs" role="tablist">
+        <li class="nav-item my-2">
+            <button class="nav-link active" id="pizzas-tab" data-bs-toggle="tab" data-bs-target="#pizzas" type="button" role="tab">
+                Pizzas
+            </button>
+        </li>
+        <li class="nav-item my-2">
+            <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab">
+                Orders
+            </button>
+        </li>
+        <li class="nav-item my-2">
+            <button class="nav-link" id="categories-tab" data-bs-toggle="tab" data-bs-target="#categories" type="button" role="tab">
+                Categories
+            </button>
+        </li>
+        <li class="nav-item my-2" th:if="${role == 'ROLE_admin'}">
+            <button class="nav-link" id="user-tab" data-bs-toggle="tab" data-bs-target="#user" type="button" role="tab">
+                Users
+            </button>
+        </li>
+
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="tabContent">
+        <!-- Pizzas -->
+        <div class="tab-pane fade show active" id="pizzas" role="tabpanel" aria-labelledby="pizzas-tab">
+            <h3 class="mt-4">Pizza List</h3>
+            <table class="table table-bordered mt-3">
+                <thead>
+                <tr>
+                    <th>Pizza Name</th>
+                    <th>Category Name</th>
+                    <th>Vegetarian</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pizza : ${pizzas}">
+                    <td th:text="${pizza.pname}"></td>
+                    <td th:text="${pizza.categoryname}"></td>
+                    <td th:text="${pizza.vegetarian ? 'Yes' : 'No'}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Orders -->
+        <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+            <h3 class="mt-4">Order List</h3>
+            <table class="table table-bordered mt-3">
+                <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Pizza Name</th>
+                    <th>Amount</th>
+                    <th>Taken</th>
+                    <th>Dispatched</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.pizzaName}"></td>
+                    <td th:text="${order.amount}"></td>
+                    <td th:text="${order.taken}"></td>
+                    <td th:text="${order.dispatched}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Categories -->
+        <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="categories-tab">
+            <h3 class="mt-4">Category List</h3>
+            <table class="table table-bordered mt-3">
+                <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category : ${categories}">
+                    <td th:text="${category.cname}"></td>
+                    <td th:text="${category.price}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Users -->
+        <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="categories-tab">
+            <h3 class="mt-4">User List</h3>
+            <table class="table table-bordered mt-3">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="users : ${users}">
+                    <td th:text="${users.name}"></td>
+                    <td th:text="${users.email }"></td>
+                    <td th:text="${users.role}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
